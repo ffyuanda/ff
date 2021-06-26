@@ -10,7 +10,7 @@ BASE_DIR = os.path.dirname(__file__)
 
 
 def url_to_text(url, filename="weibo.html", save=False):
-    user_agent = {'User-agent': 'AdsBot-Google (+http://www.google.com/adsbot.html)'}
+    user_agent = {"User-agent": "AdsBot-Google (+http://www.google.com/adsbot.html)"}
     r = requests.get(url, headers=user_agent)
     # print(r.text)
     # p_nick = re.compile(r"CONFIG\['onick'\]='(.*?)'")
@@ -24,14 +24,14 @@ def url_to_text(url, filename="weibo.html", save=False):
         # r.encoding = 'utf-8'
         html_text = r.text
         if save:
-            with open(filename, "w", encoding='utf-8') as f:
+            with open(filename, "w", encoding="utf-8") as f:
                 f.write(html_text)
 
         return html_text
     return ""
 
 
-def parse_and_extract(url, name='2020'):
+def parse_and_extract(url, name="2020"):
     html_text = url_to_text(url)
     # print(html_text)
     # html_text = html_text.encode(encoding="utf-8")
@@ -39,9 +39,9 @@ def parse_and_extract(url, name='2020'):
     entry_class = "div.WB_text.W_f14"
     entry_list = r_html.find(entry_class)
     # print(entry_list[1].text)
-    return_text = ''
+    return_text = ""
     for entry in entry_list:
-        return_text += entry.text + '\n'
+        return_text += entry.text + "\n"
         # print()
     return return_text
 

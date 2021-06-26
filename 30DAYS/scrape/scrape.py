@@ -13,13 +13,13 @@ def url_to_text(url, filename="world.html", save=False):
     if r.status_code == 200:
         html_text = r.text
         if save:
-            with open(filename, 'w', encoding='utf-8') as f:
+            with open(filename, "w", encoding="utf-8") as f:
                 f.write(html_text)
         return html_text
     return ""
 
 
-def parse_and_extract(url, name='2020'):
+def parse_and_extract(url, name="2020"):
 
     html_text = url_to_text(url)
     r_html = HTML(html=html_text)  # HTML object
@@ -29,9 +29,9 @@ def parse_and_extract(url, name='2020'):
     if len(r_table) == 1:
 
         parsed_table = r_table[0]
-        rows = parsed_table.find('tr')
+        rows = parsed_table.find("tr")
         header_row = rows[0]
-        header_cols = header_row.find('th')
+        header_cols = header_row.find("th")
         header_names = [x.text for x in header_cols]
         table_data = []
         for row in rows[1:]:
@@ -44,9 +44,9 @@ def parse_and_extract(url, name='2020'):
             table_data.append(row_data)
 
         df = pd.DataFrame(table_data, columns=header_names)
-        path = os.path.join(BASE_DIR, 'data')
+        path = os.path.join(BASE_DIR, "data")
         os.makedirs(path, exist_ok=True)
-        filepath = os.path.join('data', '{}.csv'.format(name))
+        filepath = os.path.join("data", "{}.csv".format(name))
         df.to_csv(filepath, index=False)
 
 
