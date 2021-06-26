@@ -34,3 +34,22 @@ class Solution:
                 combined_i = combined_i.union(temp_set)
 
         return count
+
+
+""" second approach """
+""" This version is way more faster since it is O(n). The previous version
+was really unstable since it loop through every interval from start to end, which is
+purely dumb. The set union() method above is O(len(s1) + len(s2)), which is also unstable. """
+
+class Solution:
+    def eraseOverlapIntervals(self, intervals: list[list[int]]) -> int:
+        sorted_i = sorted(intervals, key=lambda x: x[1])
+        count, prev = 0, sorted_i[0][1]
+        
+        for i in range(1, len(sorted_i)):
+            if sorted_i[i][0] < prev:
+                count += 1
+            else:
+                prev = sorted_i[i][1]
+            
+        return count
