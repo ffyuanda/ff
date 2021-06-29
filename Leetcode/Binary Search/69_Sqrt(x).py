@@ -27,3 +27,27 @@ class Solution:
         if u_r*u_r > x >= r*r: return r
         elif x >= u_r*u_r: return u_r
         elif x < r*r: return l_r
+
+""" A more organized solution """
+class Solution:
+    def mySqrt(self, x):
+
+        low, high = 0, x
+        while(low <= high):
+            mid = int((low + high) / 2)
+            if mid*mid > x :
+                high = mid - 1
+            elif mid*mid < x:
+                low = mid + 1
+            else:
+                return mid
+
+        return low - 1
+       
+""" Newton's Method """
+class Solution:
+    def mySqrt(self, x):
+        r = x
+        while r*r > x:
+            r = int((r + x/r) / 2)        
+        return r 
