@@ -3,7 +3,11 @@
 """ Hard one for me, the binary search part is easy, but the first 
 and second sorted array part is messy. """
 
-# TODO: need a better written analysis
+""" It is a modified binary search, you have to shrink the search range
+until both mid and target are in the same array (where normal binary search
+starts to work). So it is still binary search, only the catch part (mid equals begin)
+is worth notice, in which case you simply move the begin index plus one to the right
+to break the catch."""
 
 class Solution:
     
